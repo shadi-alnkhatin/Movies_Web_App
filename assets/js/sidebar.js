@@ -1,20 +1,29 @@
 "use strict";
-
-import { api_key, fetchDataFromServer } from "./api.js";
-
+import { api_key } from "./api.js";
 export function sidebar() {
   const genreList = {};
 
-  fetchDataFromServer(
-    `https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`,
-    function ({ genres }) {
-      for (const { id, name } of genres) {
-        genreList[id] = name;
-      }
+ // Fetch the list of movie genres
+fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
+.then(response => {
+  if (!response.ok) {
+    throw new Error('Network response was not ok'); 
+  }
+  return response.json(); // Parse the JSON data
+})
+.then(data => {
+  const { genres } = data; // Destructure the genres from the response
 
-      genreLink();
-    }
-  );
+  // Loop through each genre and store it in the genreList object
+  for (const { id, name } of genres) {
+    genreList[id] = name;
+  }
+
+  genreLink(); // Call the genreLink function after populating genreList
+})
+.catch(error => {
+  console.error('There has been a problem with your fetch operation:', error); // Handle any errors
+});
 
   const sidebarInner = document.createElement("div");
   sidebarInner.classList.add("sidebar-inner");
@@ -24,14 +33,15 @@ export function sidebar() {
       <p class="title">Genre</p>
     </div>
     <div class="sidebar-list">
+      <a href="./favorite-list.html" menu-close="" class="sidebar-link" onclick="getMovieList(&quot;with_original_language=en&quot;, &quot;English&quot;)">Favorite list</a>
       <p class="title">Language</p>
 
       <a href="./movie-list.html" menu-close class="sidebar-link"
         onclick='getMovieList("with_original_language=en", "English")'>English</a>
       <a href="./movie-list.html" menu-close class="sidebar-link"
-        onclick='getMovieList("with_original_language=zh", "Mandarin")'>Mandarin</a>
+        onclick='getMovieList("with_original_language=fr", "French")'>French</a>
       <a href="./movie-list.html" menu-close class="sidebar-link"
-        onclick='getMovieList("with_original_language=ms", "Malay")'>Malay</a>
+        onclick='getMovieList("with_original_language=ar", "Arabic")'>Arabic</a>
       <a href="./movie-list.html" menu-close class="sidebar-link"
         onclick='getMovieList("with_original_language=hi", "Hindi")'>Hindi</a>
     </div>

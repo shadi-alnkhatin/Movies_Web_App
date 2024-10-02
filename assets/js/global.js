@@ -24,9 +24,25 @@ const getMovieList = function (urlParam, genreName) {
 };
 
 let favorite_Arr = JSON.parse(localStorage.getItem("array"));
+if(favorite_Arr == null){
+  favorite_Arr=[]
+  let temp = JSON.stringify(favorite_Arr);
+localStorage.setItem("array",temp);
+}
+
+function favorite_status(id){
+  console.log(id);
+  let b = document.querySelector("#favorite-button-id"+id);
+  
+  if(favorite_Arr.includes(id))
+    b.classList.add("favorite-button");
+}
+
+
+
 function favorite_togle(id){
   let b = document.querySelector("#favorite-button-id"+id);
-  b.classList.toggle("favorite-button");
+  // b.classList.toggle("favorite-button");
   if(b.getAttribute("favotite") == "false"){
     favorite_Arr.push(id);
     b.setAttribute("favotite","true");
@@ -42,8 +58,4 @@ let temp = JSON.stringify(favorite_Arr);
 localStorage.setItem("array",temp);
 let array = JSON.parse(localStorage.getItem("array"));
 console.log(array);
-
 }
-
-
-// export {favorite_Arr}

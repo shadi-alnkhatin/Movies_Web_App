@@ -16,8 +16,11 @@ sidebar();
 let currentPage = 1;
 let totalPages = 0;
 
+console.log(favorite_Arr);
+
 function fetchMovies(page) {
   const url = `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&sort_by=popularity.desc&include_adult=false&page=${page}&${urlParam}`;
+console.log(url);
 
   // Use fetch to get the movie data
   fetch(url)
@@ -28,6 +31,11 @@ function fetchMovies(page) {
       return response.json();
     })
     .then(data => {
+      data.results.forEach(element => {
+        console.log(element.id);
+      });
+      console.log();
+      
       const { results: movieList, total_pages } = data; // Destructure the movie list and total pages
       totalPages = total_pages; // Update the total pages
 

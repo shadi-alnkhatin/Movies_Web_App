@@ -1,200 +1,198 @@
-"use strict";
+"use strict"; // This makes sure we write clean code
 
-import { sidebar } from "./sidebar.js";
-import { api_key, imageBaseURL, fetchDataFromServer } from "./api.js";
-import { createMovieCard } from "./movie-card.js";
-import { search } from "./search.js";
+// Importing functions and variables from other files
+import { sidebar } from "./sidebar.js"; // Handles sidebar functionality
+import { api_key, imageBaseURL } from "./api.js"; // API key, base URL, and data fetch function
+import { createMovieCard } from "./movie-card.js"; // Creates movie cards
+import { search } from "./search.js"; // Handles the search functionality
 
+// Select the main content area in the HTML where the movie data will be displayed
 const pageContent = document.querySelector("[page-content]");
 
+// Show the sidebar on the page
 sidebar();
 
-// Home page sections (Top rated, Upcoming, Trending movies)
+// Set up the different sections that will be displayed on the home page
 const homePageSections = [
   {
-    title: "Upcoming Movies",
-    path: "/movie/upcoming",
+    title: "Upcoming Movies", // This section will show upcoming movies
+    path: "/movie/upcoming",  // Path to get upcoming movies from the API
   },
   {
-    title: "Weekly Trending Movies",
-    path: "/trending/movie/week",
+    title: "Weekly Trending Movies", // This section will show trending movies of the week
+    path: "/trending/movie/week",    // Path to get trending movies from the API
   },
   {
-    title: "Top Rated Movies",
-    path: "/movie/top_rated",
+    title: "Top Rated Movies",  // This section will show top-rated movies
+    path: "/movie/top_rated",   // Path to get top-rated movies from the API
   },
 ];
 
-// fetch all genre then change genre format
-// [ { "id": "123", "name": "Action" } ] --> { 123: "Action" }
-
+// This object will store movie genres (e.g., Action, Comedy)
 const genreList = {
-  // create genre string from genre_id eg: [23, 43] -> "Action, Romance".
+  // This function will take a list of genre IDs and return them as a string (e.g., "Action, Comedy")
   asString(genreIdList) {
-    let newGenreList = [];
+    let genreNames = []; // An array to store genre names
 
+    // For each genre ID in the list, check if it exists in the genreList object
     for (const genreId of genreIdList) {
-      this[genreId] && newGenreList.push(this[genreId]); // this == genreList;
+      if (this[genreId]) { // If it exists, add the genre name to the array
+        genreNames.push(this[genreId]);
+      }
     }
 
-    return newGenreList.join(", ");
+    // Return the genre names as a comma-separated string
+    return genreNames.join(", ");
   },
 };
 
-fetchDataFromServer(
-  `https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`,
-  function ({ genres }) {
-    for (const { id, name } of genres) {
-      genreList[id] = name;
+// Fetch the list of movie genres from the API
+// Fetch the genre list
+fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    // Store each genre (with its ID and name) in the genreList object
+    for (const genre of data.genres) {
+      genreList[genre.id] = genre.name;
     }
 
-    fetchDataFromServer(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&page=1`,
-      heroBanner
-    );
-  }
-);
+    // After getting the genres, fetch popular movies for the hero banner
+    return fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${api_key}&page=1`);
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(popularMovies => {
+    displayHeroBanner(popularMovies); // Call the function to display the hero banner with popular movies
+  })
+  .catch(error => {
+    console.error('There has been a problem with your fetch operation:', error); // Handle any errors
+  });
 
-// HERO BANNER
-const heroBanner = function ({ results: movieList }) {
+// Function to display the hero banner (the large slider on top of the page)
+function displayHeroBanner(data) {
+  // Create a section for the banner
   const banner = document.createElement("section");
   banner.classList.add("banner");
-  banner.ariaLabel = "Popular Movies";
 
+  // Add empty containers for the slider and control buttons
   banner.innerHTML = `
-      <div class="banner-slider"></div>
-      
-      <div class="slider-control">
-        <div class="control-inner"></div>
+    <div class="banner-slider"></div>
+    <div class="slider-control">
+      <div class="control-inner"></div>
+    </div>
+  `;
+
+  // Loop through the list of popular movies
+  data.results.forEach(function (movie, index) {
+    // Create a slide for each movie
+    const slide = document.createElement("div");
+    slide.classList.add("slider-item");
+
+    // Add the movie details to the slide
+    slide.innerHTML = `
+      <img src="${imageBaseURL}w1280${movie.backdrop_path}" alt="${movie.title}">
+      <div class="banner-content">
+        <h2>${movie.title}</h2>
+        <p>Released: ${movie.release_date ? movie.release_date.split("-")[0] : "N/A"}</p>
+        <p>Rating: ${movie.vote_average.toFixed(1)}</p>
+        <p>Genres: ${genreList.asString(movie.genre_ids)}</p>
+        <p>${movie.overview}</p>
+        <a href="./detail.html" onclick="getMovieDetail(${movie.id})">Watch Now</a>
       </div>
     `;
 
-  let controlItemIndex = 0;
+    // Add the slide to the banner slider
+    banner.querySelector(".banner-slider").appendChild(slide);
 
-  for (const [index, movie] of movieList.entries()) {
-    const {
-      backdrop_path,
-      title,
-      release_date,
-      genre_ids,
-      overview,
-      poster_path,
-      vote_average,
-      id,
-    } = movie;
+    // Create a control button for the slide
+    const controlButton = document.createElement("button");
+    controlButton.classList.add("slider-item");
+    controlButton.innerHTML = `<img src="${imageBaseURL}w154${movie.poster_path}" alt="${movie.title}">`;
+    
+    // Add the control button to the banner controls
+    banner.querySelector(".control-inner").appendChild(controlButton);
+  });
 
-    const sliderItem = document.createElement("div");
-    sliderItem.classList.add("slider-item");
-    sliderItem.setAttribute("slider-item", "");
-
-    sliderItem.innerHTML = `
-        <img src="${imageBaseURL}w1280${backdrop_path}" alt="${title}" class="img-cover" loading=${
-      index === 0 ? "eager" : "lazy"
-    }>
-        
-        <div class="banner-content">
-        
-          <h2 class="heading">${title}</h2>
-        
-          <div class="meta-list">
-            <div class="meta-item">${
-              release_date?.split("-")[0] ?? "Not Released"
-            }</div>
-        
-            <div class="meta-item card-badge">${vote_average.toFixed(1)}</div>
-          </div>
-        
-          <p class="genre">${genreList.asString(genre_ids)}</p>
-        
-          <p class="banner-text">${overview}</p>
-        
-          <a href="./detail.html" class="btn" onclick="getMovieDetail(${id})">
-            <img src="./assets/images/play_circle.png" width="24" height="24" aria-hidden="true" alt="play circle">
-        
-            <span class="span">Watch Now</span>
-          </a>
-        
-        </div>
-      `;
-    banner.querySelector(".banner-slider").appendChild(sliderItem);
-
-    const controlItem = document.createElement("button");
-    controlItem.classList.add("poster-box", "slider-item");
-    controlItem.setAttribute("slider-control", `${controlItemIndex}`);
-
-    controlItemIndex++;
-
-    controlItem.innerHTML = `
-        <img src="${imageBaseURL}w154${poster_path}" alt="Slide to ${title}" loading="lazy" draggable="false" class="img-cover">
-      `;
-    banner.querySelector(".control-inner").appendChild(controlItem);
-  }
-
+  // Add the completed banner to the page content
   pageContent.appendChild(banner);
 
-  addHeroSlide();
+  // Activate the slider functionality
+  activateSlider();
 
-  // fetch data for home page sections (top rated, upcoming, trending)
-  for (const { title, path } of homePageSections) {
-    fetchDataFromServer(
-      `https://api.themoviedb.org/3${path}?api_key=${api_key}&page=1`,
-      createMovieList,
-      title
-    );
-  }
-};
+  // After the hero banner is displayed, fetch and display the home page sections (e.g., Upcoming Movies)
+  homePageSections.forEach(function (section) {
+    fetch(`https://api.themoviedb.org/3${section.path}?api_key=${api_key}&page=1`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        displayMovieSection(data, section.title); // Call the function to display the movie section
+      })
+      .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error); // Handle any errors
+      });
+  });
+  
+}
 
-// HERO SLIDER
-const addHeroSlide = function () {
-  const sliderItems = document.querySelectorAll("[slider-item]");
-  const sliderControls = document.querySelectorAll("[slider-control]");
+// Function to activate the slider (so users can click through the slides)
+function activateSlider() {
+  const sliderItems = document.querySelectorAll(".slider-item");
+  const controlButtons = document.querySelectorAll(".slider-control button");
 
-  let lastSliderItem = sliderItems[0];
-  let lastSliderControl = sliderControls[0];
+  // Start with the first slide active
+  sliderItems[0].classList.add("active");
+  controlButtons[0].classList.add("active");
 
-  lastSliderItem.classList.add("active");
-  lastSliderControl.classList.add("active");
-  //activating the first movie slide
+  // Add a click event to each control button to change the slide
+  controlButtons.forEach(function (button, index) {
+    button.addEventListener("click", function () {
+      // Remove the "active" class from the current slide and button
+      document.querySelector(".slider-item.active").classList.remove("active");
+      document.querySelector(".slider-control button.active").classList.remove("active");
 
-  const sliderStart = function () {
-    lastSliderItem.classList.remove("active");
-    lastSliderControl.classList.remove("active");
+      // Add the "active" class to the clicked button and corresponding slide
+      sliderItems[index].classList.add("active");
+      controlButtons[index].classList.add("active");
+    });
+  });
+}
 
-    // `this` == slider-control
-    sliderItems[Number(this.getAttribute("slider-control"))].classList.add(
-      "active"
-    );
-    this.classList.add("active");
+// Function to display movie sections like "Upcoming Movies" or "Top Rated Movies"
+function displayMovieSection(data, title) {
+  // Create a section for the movie list
+  const section = document.createElement("section");
+  section.classList.add("movie-list");
 
-    lastSliderItem = sliderItems[Number(this.getAttribute("slider-control"))];
-    lastSliderControl = this;
-  };
-
-  addEventOnElements(sliderControls, "click", sliderStart);
-};
-
-const createMovieList = function ({ results: movieList }, title) {
-  const movieListElem = document.createElement("section");
-  movieListElem.classList.add("movie-list");
-  movieListElem.ariaLabel = `${title}`;
-
-  movieListElem.innerHTML = `
-    <div class="title-wrapper">
-      <h3 class="title-large">${title}</h3>
-    </div>
-    
+  // Add the title of the section
+  section.innerHTML = `
+    <h3>${title}</h3>
     <div class="slider-list">
       <div class="slider-inner"></div>
     </div>
   `;
 
-  for (const movie of movieList) {
-    const movieCard = createMovieCard(movie); // called from movie_card.js
+  // Loop through the list of movies and create movie cards
+  data.results.forEach(function (movie) {
+    const movieCard = createMovieCard(movie); // This function creates a card for each movie
+    section.querySelector(".slider-inner").appendChild(movieCard); // Add the card to the section
+  });
 
-    movieListElem.querySelector(".slider-inner").appendChild(movieCard);
-  }
+  // Add the section to the page content
+  pageContent.appendChild(section);
+}
 
-  pageContent.appendChild(movieListElem);
-};
-
+// Initialize the search functionality on the page
 search();
