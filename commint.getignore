@@ -1,0 +1,275 @@
+// let form_reg=document.querySelector(".form-wrapper");
+// form_reg.addEventListener('submit',()=>{
+// let reg_email=document.getElementById("reg-email").value;
+// let reg_pass=document.getElementById("reg-pass").value;
+// console.log(reg_email);
+// var regstaion_info=[{"remail":reg_email},{"rpass":reg_pass}];
+// var covertregtojson= JSON.stringify(regstaion_info);
+// localStorage.setItem("reg-info",covertregtojson);
+//     // var dina=JSON.parse(covertregtojson);
+//     // localStorage.getItem(dina);
+// });
+// let loginform=document.getElementById("login");
+// loginform.addEventListener('submit',()=>{
+//     var logininfo=localStorage.getItem(covertregtojson);
+//   var covertregtoobject=JSON.parse(logininfo);
+//   var loginuser=covertregtoobject[0].remail;
+//   var loginpass=covertregtoobject[1].rpass;
+//   console.log(loginuser);
+
+// });
+// Registration Form Submission
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url(poster-background-hlybuowt1whxbh2z.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.warrper{
+    position: relative;
+    width: 400px;
+    height: 500px;
+    background-color: rgb(107, 61, 61);
+    border-radius: 20px;
+    box-shadow:  0 0 50px (0,0,0 ,.1);
+    padding: 40px;
+
+}
+.form-wrapper{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    transition: 1s ease-in-out;
+}
+.warrpe.active .form-wrapper.login{
+    transform: scale(0) translate(-300px ,500px);
+}
+.warrper .form-wrapper .register{
+    position: absolute;
+    top: 0;
+    transform: scale(0);
+}
+.form-wrapper h2{
+    font-size: 2em;
+    color: aliceblue;
+    text-align: center;
+}
+
+.form-wrapper .input-group{
+    position: relative;
+    margin: 30px 0;
+    border-bottom: 2px solid white;
+
+}
+.warrpe.active .form-wrapper.register{
+    transform: scale(1);
+}
+.input-group label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    color: white;
+    pointer-events: none;
+    transition: .5s;
+}
+.input-group input{
+    width: 320px;
+    height: 40px;
+    font-size: 1em;
+    color: white;
+    padding: 0 5px;
+    background: transparent;
+    border: none;
+    outline: none;
+
+}
+.input-group input:focus~label,
+.input-group input:valid~label{
+    top: -5px;
+}
+.remember{
+    margin: -5px 0 15px 5px;
+}
+.remember label{
+    color: white;
+    font-size: 14px;
+}
+.remember label input{
+    /* this used to color the check box after it check */
+    accent-color: red;
+}
+button{
+    position: relative;
+    width: 100%;
+    height: 40px;
+    background-color: brown;
+    font-size: 1em;
+    color: white;
+    cursor: pointer;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+}
+.signup{
+    font-size: 14px;
+    text-align: center;
+    margin: 15px 0;
+}
+.signup p{
+    color: white;
+}
+.signup  a{
+    color: red;
+    text-decoration: none;
+    font-weight: 500;
+
+}
+.signup  a:hover{
+    text-decoration:underline;
+
+}
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - www.codingnepalweb.com -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login page</title>
+    <link rel="stylesheet" href="styl.css">
+</head>
+<body>
+    <div class="warrper">
+        <div class="form-wrapper register">
+            <h2>Sign Up</h2>
+            <form action="" method="post">
+                <div class="input-group">
+                    <input type="text" required>
+                    <label>Your Name</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" required id="reg-email">
+                    <label>Email</label>
+                </div>
+                <div class="input-group">
+                    <input type="password" required id="reg-pass">
+                    <label>Password</label>
+                </div>
+                    <div class="remember">
+                        <label for="remember-me"><input type="checkbox">I agree to this Conditions </label>
+                    </div>
+                    <button type="submit" id="reg-submit">Sign up</button>
+                    <div class="signinlink">
+                    <p class="signup">already have account <a href="#" class="signinbtn-link">Sign in</a></p>
+                </div>
+            </form>
+        </div>
+    <div class="form-wrapper login" id="login">
+        <h2>Sign In</h2>
+        <form action="#" method="post">
+            <div class="input-group">
+                <input type="text" required id="email">
+                <label>Email</label>
+            </div>
+            <div class="input-group">
+                <input type="password" required id="password">
+                <label>Password</label>
+            </div>
+                <div class="remember">
+                    <label for="remember-me"><input type="checkbox" id="remember-me">Remember me</label>
+                </div>
+                <button type="submit" >Sign In</button>
+
+                <div class="signuplink">
+                <p class="signup">You dont have account <a href="#" class="signupbtn-link" >Sign up</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+    
+<script src="main.js"></script>
+</body>
+</html>
+script
+'use strict'
+let signinlink=document.querySelector(".signinbtn-link");
+let signuplink=document.querySelector(".signupbtn-link");
+let container=document.querySelector(".warrper");
+container.addEventListener('click',()=>{
+ signinlink.classList.toggle('active');
+});
+
+
+let loginuser= document.getElementById("email").value;
+let loginpass=document.getElementById("password").value;
+let reg_email=document.getElementById("reg-email").value;
+let reg_submit=document.getElementById("reg-submit");
+let reg_pass=document.getElementById("reg-pass").value;
+var regstaion_info=[{"reg-email":reg_email},{"reg-pass":reg_pass}];
+var covertregtojson= JSON.stringify(regstaion_info);
+localStorage.setItem("reg-info",covertregtojson);
+var dina=JSON.parse(covertregtojson);
+localStorage.getItem(dina);
+
+// Registration Form Submission
+let form_reg = document.querySelector(".form-wrapper");
+form_reg.addEventListener('submit', (event) => {
+    event.preventDefault();  // Prevents form from submitting and reloading the page
+    let reg_email = document.getElementById("reg-email").value;
+    let reg_pass = document.getElementById("reg-pass").value;
+    
+    // Store registration info in an array of objects
+    let regstaion_info = [{"remail": reg_email}, {"rpass": reg_pass}];
+    
+    // Convert the array of objects to JSON string
+    let covertregtojson = JSON.stringify(regstaion_info);
+    
+    // Save to localStorage using the key "reg-info"
+    localStorage.setItem("reg-info", covertregtojson);
+    console.log("Registration info saved:", reg_email, reg_pass);
+});
+
+// Login Form Submission
+let loginform = document.getElementById("login");
+loginform.addEventListener('submit', (event) => {
+    event.preventDefault();  // Prevents form from submitting and reloading the page
+    
+    // Retrieve the registration info from localStorage
+    let logininfo = localStorage.getItem("reg-info");  // use the correct key here
+    
+    // Check if there's any data stored
+    if (logininfo) {
+        // Convert the JSON string back to an array of objects
+        let covertregtoobject = JSON.parse(logininfo);
+        
+        // Extract the stored email and password
+        let stored_email = covertregtoobject[0].remail;
+        let stored_pass = covertregtoobject[1].rpass;
+        
+        // Get the email and password from the login form
+        let login_email = document.getElementById("login-email").value;
+        let login_pass = document.getElementById("login-pass").value;
+        
+        // Compare the login values with the stored registration values
+        if (login_email === stored_email && login_pass === stored_pass) {
+            console.log("Great");  // Print "Great" if the email and password match
+        } else {
+            console.log("Login credentials do not match.");
+        }
+    } else {
+        console.log("No registration info found in localStorage.");
+    }
+});

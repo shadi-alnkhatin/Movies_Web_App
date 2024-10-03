@@ -1,67 +1,62 @@
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - www.codingnepalweb.com -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netflix Login Page | CodingNepal</title>
+    <title>Login page</title>
     <link rel="stylesheet" href="styl.css">
 </head>
 <body>
-    <nav>
-        <a href="#"><img src="images/logo.svg" alt="logo"></a>
-    </nav>
-
-    <div class="warrper">
-    <div class="form-wrapper login">
-        <h2>Sign In</h2>
-        <form action="#">
-            <div class="input-group">
-                <input type="text" required>
-                <label>Email or phone number</label>
-            </div>
-            <div class="input-group">
-                <input type="password" required>
-                <label>Password</label>
-            </div>
-                <div class="remember">
-                    <label for="remember-me"><input type="checkbox" id="remember-me">Remember me</label>
+    <div class="wrapper">
+        <!-- Sign Up Form -->
+        <div class="form-wrapper register" id="register-form">
+            <h2>Sign Up</h2>
+            <form action="" method="post">
+                <div class="input-group">
+                    <input type="text" required>
+                    <label>Your Name</label>
                 </div>
-                <button type="submit" >Sign In</button>
-
-                <div class="signuplink">
-                <p class="signup">You dont have account <a href="#" class="signupbtn-link" >Sign up</a></p>
-            </div>
-        </form>
-       
-    </div>
-    <div class="form-wrapper register">
-        <h2>Sign Up</h2>
-        <form action="#">
-            <div class="input-group">
-                <input type="text" required>
-                <label>Your Name</label>
-            </div>
-            <div class="input-group">
-                <input type="text" required>
-                <label>Email</label>
-            </div>
-            <div class="input-group">
-                <input type="password" required>
-                <label>Password</label>
-            </div>
-                <div class="remember">
-                    <label for="remember-me"><input type="checkbox" id="remember-me">I agree to this Conditions </label>
+                <div class="input-group">
+                    <input type="text" required id="reg-email">
+                    <label>Email</label>
                 </div>
-                <button type="submit">Sign up</button>
+                <div class="input-group">
+                    <input type="password" required id="reg-pass">
+                    <label>Password</label>
+                </div>
+                <div class="remember">
+                    <label for="remember-me"><input type="checkbox"> I agree to the conditions </label>
+                </div>
+                <button type="submit" id="reg-submit">Sign up</button>
                 <div class="signinlink">
-                <p class="signup">already have account <a href="#" class="signinbtn-link">Sign in</a></p>
-            </div>
-        </form>
-      
+                    <p class="signup">Already have an account? <a href="#" id="signinbtn-link">Sign in</a></p>
+                </div>
+            </form>
+        </div>
+
+        <!-- Sign In Form -->
+        <div class="form-wrapper login" id="login-form">
+            <h2>Sign In</h2>
+            <form action="#" method="post">
+                <div class="input-group">
+                    <input type="text" required id="login-email">
+                    <label>Email</label>
+                </div>
+                <div class="input-group">
+                    <input type="password" required id="login-pass">
+                    <label>Password</label>
+                </div>
+                <div class="remember">
+                    <label for="remember-me"><input type="checkbox" id="remember-me"> Remember me</label>
+                </div>
+                <button type="submit">Sign In</button>
+                <div class="signuplink">
+                    <p class="signup">Don't have an account? <a href="#" id="signupbtn-link">Sign up</a></p>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
     
-<script src="main.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
