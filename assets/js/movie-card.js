@@ -33,11 +33,13 @@ if(favorite_Arr == null){
       <img src="${imageBaseURL}w342${poster_path}" alt="${title}" class="img-cover" loading="lazy">
     </figure>
     
+    <div class="flex_container">
     <h4 class="title">${title}</h4>
-    <button id="favorite-button-id${id}" class="favorite" href="" style="z-index=1000; display: abslute;" onclick="favorite_togle(${id});" favotite="${favorite}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+      <button id="favorite-button-id${id}" class="favorite" href="" style="z-index=1000; display: abslute;" onclick="favorite_togle(${id});" favotite="${favorite}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
 </svg></button>
-
+    </div>
+          <a href="./detail.html" class="details-button" title="${title}" onclick="getMovieDetail(${id})">Go to details</a>
     <div class="meta-list">
       <div class="meta-item">
         <img src="./assets/images/star.png" width="20" height="20" loading="lazy" alt="rating">
@@ -51,7 +53,7 @@ if(favorite_Arr == null){
      
   `;
 
-  // <a href="./detail.html" class="card-btn" title="${title}" onclick="getMovieDetail(${id})"></a>
+  
   // if (favorite_Arr.includes(id))
   //   document.getElementById("favorite-button-id"+id).setAttribute("favotite","ture");
   // else

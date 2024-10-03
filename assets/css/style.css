@@ -54,7 +54,25 @@
 }
 
 .favorite[favotite="true"]{
-  color: red;
+  color: #db0028;
+}
+
+.details-button {
+  border: none;
+  background-color: #db0028;
+  border-radius: 10px;
+  padding: 0 10px;
+  width: fit-content;
+}
+
+.flex_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex_container * {
+  display: block;
 }
 
 /*-----------------------------------*\
@@ -862,7 +880,7 @@ body {
   }
 
   .logo img {
-    width: 160px;
+   height: 100%;
   }
 
   .menu-btn,

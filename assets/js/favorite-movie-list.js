@@ -19,27 +19,9 @@ let totalPages = 0;
 console.log(favorite_Arr);
 
 function fetchMovies(page) {
-  const url = `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&sort_by=popularity.desc&include_adult=false&page=${page}&${urlParam}`;
-console.log(url);
 
-  // Use fetch to get the movie data
-  fetch(url)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      data.results.forEach(element => {
-        console.log(element.id);
-      });
-      console.log();
-      
-      const { results: movieList, total_pages } = data; // Destructure the movie list and total pages
-      totalPages = total_pages; // Update the total pages
 
-      document.title = `${genreName} Movies - Tvflix`; // Set the page title
+document.title = `${genreName} Movies - Tvflix`; // Set the page title
 
       // Create or clear the section for the movie list
       let movieListElem = document.querySelector('.movie-list');
@@ -64,19 +46,22 @@ console.log(url);
         movieListElem.querySelector(".grid-list").innerHTML = ''; // Clear existing movie cards
       }
 
-      // Add movie cards based on fetched items
-      for (const movie of movieList) {
-        const movieCard = createMovieCard(movie);
-        movieListElem.querySelector(".grid-list").appendChild(movieCard); 
-      }
 
-      // Enable or disable buttons based on the current page
-      movieListElem.querySelector('.prev').disabled = currentPage === 1; // Disable "Previous" if on the first page
-      movieListElem.querySelector('.next').disabled = currentPage >= totalPages; // Disable "Next" if on the last page
+      favorite_Arr.forEach(element => {
+        const url = `https://api.themoviedb.org/3/movie/${element}?api_key=${api_key}&append_to_response=casts,videos,images,releases`;
+        fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
     })
-    .catch(error => {
-      console.error('There has been a problem with your fetch operation:', error); // Handle any errors
+    .then(data => {
+        console.log(data);
+        const movieCard = createMovieCard(data);
+        movieListElem.querySelector(".grid-list").appendChild(movieCard); 
     });
+      });
 };
 
 fetchMovies(currentPage);
