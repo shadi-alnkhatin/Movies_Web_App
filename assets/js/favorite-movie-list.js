@@ -33,13 +33,10 @@ document.title = `${genreName} Movies - Tvflix`; // Set the page title
         // Add the title and a grid list to the movie list section
         movieListElem.innerHTML = `
           <div class="title-wrapper">
-            <h1 class="heading">All ${genreName} Movies</h1>
+            <h1 class="heading">Favorite Movies</h1>
           </div>
           <div class="grid-list"></div>
-          <div class="pagination">
-            <button class="btn prev" ${page === 1 ? 'disabled' : ''}>Previous</button>
-            <button class="btn next">Next</button>
-          </div>
+          
         `;
         pageContent.appendChild(movieListElem); // Add the movie list section to the page
       } else {
@@ -66,19 +63,5 @@ document.title = `${genreName} Movies - Tvflix`; // Set the page title
 
 fetchMovies(currentPage);
 
-// Add event listeners for pagination buttons
-pageContent.addEventListener('click', function(event) {
-  if (event.target.classList.contains('prev')) {
-    if (currentPage > 1) {
-      currentPage--;
-      fetchMovies(currentPage);
-    }
-  } else if (event.target.classList.contains('next')) {
-    if (currentPage < totalPages) {
-      currentPage++;
-      fetchMovies(currentPage);
-    }
-  }
-});
 
 search();
