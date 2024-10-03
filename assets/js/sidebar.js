@@ -31,9 +31,11 @@ fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
   sidebarInner.innerHTML = `
     <div class="sidebar-list">
       <p class="title">Genre</p>
+
     </div>
     <div class="sidebar-list">
       <a href="./favorite-list.html" menu-close="" class="sidebar-link" onclick="getMovieList(&quot;with_original_language=en&quot;, &quot;English&quot;)">Favorite list</a>
+
       <p class="title">Language</p>
 
       <a href="./movie-list.html" menu-close class="sidebar-link"
@@ -44,16 +46,6 @@ fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
         onclick='getMovieList("with_original_language=ar", "Arabic")'>Arabic</a>
       <a href="./movie-list.html" menu-close class="sidebar-link"
         onclick='getMovieList("with_original_language=hi", "Hindi")'>Hindi</a>
-    </div>
-
-
-
-    <div class="sidebar-footer">
-      <p class="copyright">
-        Copyright 2023
-        <a href="https://naufalfiqri.netlify.app" target="_blank">Naufal Fiqri</a>
-      </p>
-      <img src="./assets/images/tmdb-logo.png" width="130" height="17" alt="the movie database logo" />
     </div>
   `;
 
@@ -69,10 +61,11 @@ fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
       );
       link.textContent = genreName;
 
-      sidebarInner.querySelectorAll(".sidebar-list")[0].appendChild(link);
+
+      sidebarInner.querySelector(".sidebar-list").appendChild(link);
     }
 
-    const sidebar = document.querySelector("[sidebar]");
+    const sidebar = document.getElementById("sidebar");
     sidebar.appendChild(sidebarInner);
     toggleSidebar(sidebar);
   };
@@ -82,7 +75,8 @@ fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
     const sidebarBtn = document.querySelector("[menu-btn]");
     const sidebarTogglers = document.querySelectorAll("[menu-toggler]");
     const sidebarClose = document.querySelectorAll("[menu-close]");
-    const overlay = document.querySelector("[overlay]");
+
+    const overlay = document.querySelector("#overlay");
 
     addEventOnElements(sidebarTogglers, "click", function () {
       sidebar.classList.toggle("active");

@@ -14,6 +14,7 @@ addEventOnElements(searchTogglers, "click", function () {
 });
 
 // store movieID in `LocalStorage` when you click any card
+
 const getMovieDetail = function (movieId) {
   window.localStorage.setItem("movieId", String(movieId));
 };
@@ -59,3 +60,4 @@ localStorage.setItem("array",temp);
 let array = JSON.parse(localStorage.getItem("array"));
 console.log(array);
 }
+

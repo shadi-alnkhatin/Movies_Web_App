@@ -1,5 +1,7 @@
 "use strict";
 
-const api_key = "35c1d5d110f7f8753fcda624065e7631";
+
+const api_key = "ae162cc7470b25cd93417839ef0564ea";
+
 const imageBaseURL = "https://image.tmdb.org/t/p/";
 export { imageBaseURL, api_key };

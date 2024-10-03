@@ -4,14 +4,13 @@ import { imageBaseURL } from "./api.js";
 
 // movie card
 
+// {name : " ", age , major}
+
 export function createMovieCard(movie) {
-  
-  const { poster_path, title, vote_average, release_date, id } = movie;
+  const { poster_path, title, vote_average, release_date, id } = movie;//destrctor
 
   const card = document.createElement("div");
   card.classList.add("movie-card");
-
-
 
   let favorite_Arr = [];
 
@@ -47,24 +46,16 @@ if(favorite_Arr == null){
     <div class="meta-list">
       <div class="meta-item">
         <img src="./assets/images/star.png" width="20" height="20" loading="lazy" alt="rating">
+
     
         <span class="span">${vote_average.toFixed(1)}</span>
       </div>
     
       <div class="card-badge">${release_date.split("-")[0]}</div>
     </div>
-    
-     
+
   `;
 
-  // <a href="./detail.html" class="details-button" title="${title}" onclick="getMovieDetail(${id})">Go to details</a>
-  // if (favorite_Arr.includes(id))
-  //   document.getElementById("favorite-button-id"+id).setAttribute("favotite","ture");
-  // else
-  //   document.getElementById("favorite-button-id"+id).setAttribute("favotite","false");
-
-  
   return card;
-  
 }
 

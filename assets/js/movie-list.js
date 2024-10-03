@@ -9,7 +9,9 @@ import { search } from "./search.js";
 const genreName = window.localStorage.getItem("genreName");
 const urlParam = window.localStorage.getItem("urlParam");
 
-const pageContent = document.querySelector("[page-content]");
+
+const pageContent =document.getElementById("container"); 
+
 
 sidebar();
 
@@ -31,21 +33,24 @@ function fetchMovies(page) {
       const { results: movieList, total_pages } = data; // Destructure the movie list and total pages
       totalPages = total_pages; // Update the total pages
 
-      document.title = `${genreName} Movies - Tvflix`; // Set the page title
+
+     
 
       // Create or clear the section for the movie list
-      let movieListElem = document.querySelector('.movie-list');
+      let movieListElem = document.querySelector('.movie-list');//t
       if (!movieListElem) {
         movieListElem = document.createElement("section");
         movieListElem.classList.add("movie-list", "genre-list");
-        movieListElem.ariaLabel = `${genreName} Movies`;
+   
 
         // Add the title and a grid list to the movie list section
         movieListElem.innerHTML = `
           <div class="title-wrapper">
             <h1 class="heading">All ${genreName} Movies</h1>
           </div>
+
           <div class="grid-list"></div>
+
           <div class="pagination">
             <button class="btn prev" ${page === 1 ? 'disabled' : ''}>Previous</button>
             <button class="btn next">Next</button>
@@ -63,7 +68,7 @@ function fetchMovies(page) {
       }
 
       // Enable or disable buttons based on the current page
-      movieListElem.querySelector('.prev').disabled = currentPage === 1; // Disable "Previous" if on the first page
+
       movieListElem.querySelector('.next').disabled = currentPage >= totalPages; // Disable "Next" if on the last page
     })
     .catch(error => {
@@ -88,4 +93,7 @@ pageContent.addEventListener('click', function(event) {
   }
 });
 
+
 search();
+
+
