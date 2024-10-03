@@ -10,7 +10,9 @@ import { search } from "./search.js";
 const movieId = window.localStorage.getItem("movieId");
 
 // Select the page content area where movie details will be shown
+
 const pageContent = document.getElementById("container");
+
 
 // Initialize the sidebar (probably for navigation)
 sidebar();
@@ -55,13 +57,20 @@ function getDirectors (crewList) {
   return directorNames.join(", ");
 };
 
+
+// Helper function to filter out only trailers and teasers from YouTube
 function filterVideos(videoList) {
+  // Create a new array to store the filtered videos
+
   let filteredVideos = [];
 
   // Loop through each video in the list
   for (let video of videoList) {
     // Check if the video is a Trailer or Teaser and is from YouTube
     if ((video.type === "Trailer" || video.type === "Teaser") && video.site === "YouTube") {
+
+      // If it meets the condition, add it to the filtered videos array
+
       filteredVideos.push(video);
     }
   }
@@ -93,14 +102,16 @@ fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}&append_t
     let VideosFiltered=filterVideos(videos); // List of videos like trailers
 
     // Set the page title to the movie title
-    // document.title = `${title} - Tvflix`;
+
+    document.title = `${title} - Tvflix`;
+
 
     // Create a container for the movie details
     let movieDetail = document.createElement("div");
     movieDetail.classList.add("movie-detail");
 
     // Set the inner HTML to display movie details
-    //https://image.tmdb.org/t/p/w1280/bHePzkyRcMhnab2qZbhj1bCElnf.jpg
+
     movieDetail.innerHTML = `
       <div class="backdrop-image" style="background-image: url('${imageBaseURL}w1280${backdrop_path || poster_path}')"></div>
       
@@ -150,9 +161,11 @@ fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}&append_t
         </div>
 
         <div class="slider-list">
+
           <div class="slider-inner">
           
           </div>
+
         </div>
       </div>
     `;
@@ -203,9 +216,11 @@ function addSuggestedMovies (response) {
     </div>
 
     <div class="slider-list">
+
       <div class="slider-inner">
       
       </div>
+
     </div>
   `;
 

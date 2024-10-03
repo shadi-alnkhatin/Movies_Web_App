@@ -48,17 +48,20 @@ fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
 function displayMovieSection(data, title) {
   const section = document.createElement("section");
   section.classList.add("movie-list");
+
   section.innerHTML = `
     <h3>${title}</h3>
     <div class="slider-list">
       <div class="slider-inner"></div>
     </div>
   `;
+
   data.results.forEach(movie => {
     const movieCard = createMovieCard(movie);
     section.querySelector(".slider-inner").appendChild(movieCard);
   });
   pageContent.appendChild(section);
 }
+
 
 search();

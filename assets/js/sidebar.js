@@ -32,9 +32,10 @@ fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
     <div class="sidebar-list">
       <p class="title">Genre</p>
 
-
     </div>
     <div class="sidebar-list">
+      <a href="./favorite-list.html" menu-close="" class="sidebar-link" onclick="getMovieList(&quot;with_original_language=en&quot;, &quot;English&quot;)">Favorite list</a>
+
       <p class="title">Language</p>
 
       <a href="./movie-list.html" menu-close class="sidebar-link"
@@ -46,7 +47,6 @@ fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
       <a href="./movie-list.html" menu-close class="sidebar-link"
         onclick='getMovieList("with_original_language=hi", "Hindi")'>Hindi</a>
     </div>
-
   `;
 
   const genreLink = function () {
@@ -61,6 +61,7 @@ fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
       );
       link.textContent = genreName;
 
+
       sidebarInner.querySelector(".sidebar-list").appendChild(link);
     }
 
@@ -74,6 +75,7 @@ fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
     const sidebarBtn = document.querySelector("[menu-btn]");
     const sidebarTogglers = document.querySelectorAll("[menu-toggler]");
     const sidebarClose = document.querySelectorAll("[menu-close]");
+
     const overlay = document.querySelector("#overlay");
 
     addEventOnElements(sidebarTogglers, "click", function () {

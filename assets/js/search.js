@@ -23,7 +23,6 @@ export function search() {
 
     searchWrapper.classList.add("searching");
     clearTimeout(searchTimeout);
-
     searchTimeout = setTimeout(() => {
       const url = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${searchField.value}&page=1&include_adult=false`;
 
