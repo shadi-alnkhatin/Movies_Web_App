@@ -81,31 +81,6 @@
 }
 
 
-
-.favorite[favotite="true"]{
-  color: #db0028;
-}
-
-.details-button {
-  border: none;
-  background-color: #db0028;
-  border-radius: 10px;
-  padding: 0 10px;
-  width: fit-content;
-}
-
-.flex_container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-}
-
-.flex_container * {
-  display: block;
-}
-
-
 /*-----------------------------------*\
   #RESET
 \*-----------------------------------*/
@@ -701,7 +676,6 @@ visibility: visible;
     display: none;
   }
 
-
   /* .carousel-inner{
     height: 100px;
   } */
@@ -745,8 +719,6 @@ visibility: visible;
   }
 
   .logo img {
-   height: 100%;
-
    height: 100%;
 
   }
@@ -802,6 +774,5 @@ visibility: visible;
 }
 .carousel-item img{
   filter:brightness(0.5);
-
 
 }
