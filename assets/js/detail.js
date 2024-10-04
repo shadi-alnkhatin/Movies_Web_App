@@ -59,6 +59,9 @@ function filterVideos(videoList) {
   for (let video of videoList) {
     // Check if the video is a Trailer or Teaser and is from YouTube
     if ((video.type === "Trailer" || video.type === "Teaser") && video.site === "YouTube") {
+
+      // If it meets the condition, add it to the filtered videos array
+
       filteredVideos.push(video);
     }
   }

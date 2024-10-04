@@ -14,9 +14,8 @@ addEventOnElements(searchTogglers, "click", function () {
 });
 
 // store movieID in `LocalStorage` when you click any card
-
-const getMovieDetail = function (movieId) {
-  window.localStorage.setItem("movieId", String(movieId));
+function getMovieDetail (movieId) {
+  localStorage.setItem("movieId", String(movieId));
 };
 
 const getMovieList = function (urlParam, genreName) {
@@ -43,6 +42,7 @@ function favorite_status(id){
 
 function favorite_togle(id){
   let b = document.querySelector("#favorite-button-id"+id);
+
   if(b.getAttribute("favotite") == "false"){
     favorite_Arr.push(id);
     b.setAttribute("favotite","true");
@@ -59,6 +59,7 @@ localStorage.setItem("array",temp);
 let array = JSON.parse(localStorage.getItem("array"));
 console.log(array);
 }
+
 
 function logout(){
   window.location.href("./index.html")

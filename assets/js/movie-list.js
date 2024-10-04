@@ -8,7 +8,9 @@ import { search } from "./search.js";
 
 const genreName = window.localStorage.getItem("genreName");
 const urlParam = window.localStorage.getItem("urlParam");
+
 const pageContent =document.getElementById("container"); 
+
 sidebar();
 search();
 
@@ -31,6 +33,7 @@ function fetchMovies(page) {
 
 
 
+
       // Create or clear the section for the movie list
       let movieListElem = document.querySelector('.movie-list');//t
       if (!movieListElem) {
@@ -49,6 +52,12 @@ function fetchMovies(page) {
           <div  href="#start" class="pagination">
             <a class="btn prev" ${page === 1 ? 'disabled' : ''}>Previous</a>
             <a href="#start" class="btn next">Next</a>
+
+          <div class="grid-list"></div>
+
+          <div class="pagination">
+            <button class="btn prev" ${page === 1 ? 'disabled' : ''}>Previous</button>
+            <button class="btn next">Next</button>
           </div>
         `;
         pageContent.appendChild(movieListElem); // Add the movie list section to the page
@@ -63,6 +72,7 @@ function fetchMovies(page) {
       }
 
       // Enable or disable buttons based on the current page
+
 
       movieListElem.querySelector('.next').disabled = currentPage >= totalPages; // Disable "Next" if on the last page
     })
@@ -87,6 +97,7 @@ pageContent.addEventListener('click', function(event) {
     }
   }
 });
+
 
 
 
