@@ -6,20 +6,17 @@ import { sidebar } from "./sidebar.js";
 import { createMovieCard } from "./movie-card.js";
 import { search } from "./search.js";
 
-// Get the movie ID from local storage (saved when a user clicked on a movie)
 const movieId = window.localStorage.getItem("movieId");
-
-// Select the page content area where movie details will be shown
 const pageContent = document.getElementById("container");
-
-// Initialize the sidebar (probably for navigation)
 sidebar();
+search();
+let favorite = "false";
+
 
 // Helper function to format genres into a readable list
 function getGenres(genreList) {
   let newGenreList = [];
 
-  // Loop over each genre and add its name to the list
   for (let genre of genreList) {
     newGenreList.push(genre.name);
   }
@@ -32,12 +29,11 @@ function getGenres(genreList) {
 function getCasts  (castList) {
   let newCastList = [];
 
-  // Loop through the cast and get up to 10 names
   for (let i = 0; i < castList.length && i < 10; i++) {
     newCastList.push(castList[i].name);
   }
 
-  // Return cast names as a comma-separated string
+
   return newCastList.join(", ");
 };
 
@@ -48,14 +44,15 @@ function getDirectors (crewList) {
   });
 
   let directorNames = directors.map( (director)=> {
-    return director.name; // Get the name of each director
+    return director.name; 
   });
-
-  // Return director names as a comma-separated string
   return directorNames.join(", ");
 };
 
+
+// Helper function to filter out only trailers and teasers from YouTube
 function filterVideos(videoList) {
+
   let filteredVideos = [];
 
   // Loop through each video in the list
@@ -65,8 +62,6 @@ function filterVideos(videoList) {
       filteredVideos.push(video);
     }
   }
-
-  // Return the filtered videos array
   return filteredVideos;
 };
 
@@ -74,33 +69,29 @@ function filterVideos(videoList) {
 
 fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}&append_to_response=casts,videos,images,releases`)
   .then(function (response) {
-    return response.json(); // Convert the response to JSON
+    return response.json(); 
   })
   .then(function (movie) {
     // Destructure the important details from the movie object
-    const backdrop_path = movie.backdrop_path; // Background image
-    const poster_path = movie.poster_path; // Movie poster image
-    const title = movie.title; // Movie title
-    const release_date = movie.release_date; // Release date
-    const runtime = movie.runtime; // Runtime in minutes
-    const vote_average = movie.vote_average; // Movie rating
-    const certification = movie.releases.countries[0]?.certification || "N/A"; // Certification
-    const genres = movie.genres; // List of genres
-    const overview = movie.overview; // Movie summary
-    const cast = movie.casts.cast; // Cast members
-    const crew = movie.casts.crew; // Crew members
+    const backdrop_path = movie.backdrop_path; 
+    const poster_path = movie.poster_path;
+    const title = movie.title; 
+    const release_date = movie.release_date; 
+    const runtime = movie.runtime; 
+    const vote_average = movie.vote_average; 
+    const certification = movie.releases.countries[0]?.certification || "N/A"; 
+    const genres = movie.genres; 
+    const overview = movie.overview; 
+    const cast = movie.casts.cast; 
+    const crew = movie.casts.crew; 
+    const movieId=movie.id;
     const videos = movie.videos.results;
-    let VideosFiltered=filterVideos(videos); // List of videos like trailers
-
-    // Set the page title to the movie title
-    // document.title = `${title} - Tvflix`;
-
+    let VideosFiltered=filterVideos(videos); 
+    
     // Create a container for the movie details
     let movieDetail = document.createElement("div");
     movieDetail.classList.add("movie-detail");
 
-    // Set the inner HTML to display movie details
-    //https://image.tmdb.org/t/p/w1280/bHePzkyRcMhnab2qZbhj1bCElnf.jpg
     movieDetail.innerHTML = `
       <div class="backdrop-image" style="background-image: url('${imageBaseURL}w1280${backdrop_path || poster_path}')"></div>
       
@@ -116,6 +107,7 @@ fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}&append_t
             <div class="meta-item">
               <img src="./assets/images/star.png" width="20" height="20" alt="rating">
               <span class="span">${vote_average.toFixed(1)}</span>
+          
             </div>
 
             <div class="separator"></div>
@@ -127,6 +119,10 @@ fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}&append_t
             <div class="meta-item">${release_date ? release_date.split("-")[0] : "Not Released"}</div>
 
             <div class="meta-item card-badge">${certification}</div>
+             <div class="separator"></div>
+                 <button id="favorite-button-id${movieId}" class="favorite" href="" style="z-index=1000; display: abslute;" onclick="favorite_togle(${movieId});" favotite="${favorite}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+</svg></button>
           </div>
 
           <p class="genre">${getGenres(genres)}</p>
@@ -150,9 +146,11 @@ fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}&append_t
         </div>
 
         <div class="slider-list">
+
           <div class="slider-inner">
           
           </div>
+
         </div>
       </div>
     `;
@@ -203,9 +201,11 @@ function addSuggestedMovies (response) {
     </div>
 
     <div class="slider-list">
+
       <div class="slider-inner">
       
       </div>
+
     </div>
   `;
 
@@ -218,6 +218,3 @@ function addSuggestedMovies (response) {
   // Add the recommended movies to the page
   pageContent.appendChild(movieListElem);
 };
-
-
-search();

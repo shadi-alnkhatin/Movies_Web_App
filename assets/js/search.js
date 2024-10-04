@@ -8,7 +8,7 @@ export function search() {
   const searchField = document.querySelector("[search-field]");
 
   const searchResultModal = document.createElement("div");
-  searchResultModal.classList.add("search-modal");
+  searchResultModal.classList.add("search-result");
   document.querySelector("main").appendChild(searchResultModal);
 
   let searchTimeout;
@@ -23,16 +23,12 @@ export function search() {
 
     searchWrapper.classList.add("searching");
     clearTimeout(searchTimeout);
-
     searchTimeout = setTimeout(() => {
       const url = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${searchField.value}&page=1&include_adult=false`;
 
       // Fetch movies directly using fetch.then.then
       fetch(url)
       .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
         return response.json();
       })
       .then(data => {

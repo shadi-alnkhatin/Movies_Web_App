@@ -6,7 +6,8 @@ import { createMovieCard } from "./movie-card.js";
 import { search } from "./search.js";
 
  const pageContent =document.getElementById("container");  
-sidebar();
+ sidebar();
+ search();
 
 const homePageSections = [
   { title: "Upcoming Movies", path: "/movie/upcoming" },
@@ -26,7 +27,6 @@ const genreList = {
 
 fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
   .then(response => {
-    if (!response.ok) throw new Error('Network response was not ok');
     return response.json();
   })
   .then(data => {
@@ -48,17 +48,17 @@ fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
 function displayMovieSection(data, title) {
   const section = document.createElement("section");
   section.classList.add("movie-list");
+
   section.innerHTML = `
     <h3>${title}</h3>
     <div class="slider-list">
       <div class="slider-inner"></div>
     </div>
   `;
+
   data.results.forEach(movie => {
     const movieCard = createMovieCard(movie);
     section.querySelector(".slider-inner").appendChild(movieCard);
   });
   pageContent.appendChild(section);
 }
-
-search();
