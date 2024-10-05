@@ -12,7 +12,7 @@
       content="MovieMaze is a popular movie app made by Group 5."/>
 
     <!-- favicon -->
-    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="./assets/images/moviemaze-high-resolution-logo-transparent.png" type="image/svg+xml" />
 
     <!-- google font link -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -46,7 +46,6 @@
   text-align: center;
   margin-top: 20px;
 }
-
 .accept-button {
   background-color: #353535; 
   border: none;
@@ -58,57 +57,6 @@
   font-size: 16px;
   border-radius: 7px;
   cursor: pointer;
-}
-
-.prices{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5%;
-  flex-wrap: wrap;
-}
-
-.price-card{
-  display: inline-block;
-  align-items: center;
-  text-align: center;
-  margin-top: 20px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
-  border-color: rgb(250, 183, 0);
-  border-radius: 10px;
-  height: 380px;
-  padding: 15px;
-  background-color: #1a1820;
-
-}
-
-.price-card:hover {
-  box-shadow: 0 4px 6px rgba(250, 183, 0, 0.8);
-  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-}
-.card-body h5{
-color: var(--on-surface-variant);
-}
-
-.card-text {
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
- justify-content: left;
- 
-}
-.card-text li {
-  margin: 5px 0;
-  font-size: 16px;
-  padding-left: 5px;
-}
-.card-text li:before {
-  content: "✓";
-  color: var(--rating-color);
-  font-weight: bold;
-  margin-right: 10px;
-  position:relative;
-  left: 0.5rem;
 }
 
 .checkbox-container {
@@ -124,35 +72,13 @@ margin-left: 10px;
 }
 
 
-.price-button { 
-  opacity: 2;
-  background-color: var(--primary);
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  position:relative;
-
-  font-size: 16px;
-  border-radius: 7px;
-  cursor: pointer;
-}
-.price-button:disabled {
-  background-color: #353535; 
-}
-.price-button:enabled {
-  opacity: 1;
-  background-color: var(--primary);
-}
-
 </style>
 <div class="terms_cond">
   <h2>MovieMaze Terms and Conditions</h2>
   <p>Last Updated: 03-10-2024</p>
   <br>
   <hr>
+  <br>
   <h4>Acceptance of Terms</h4>
   <p>By using MovieMaze, you agree to these terms. If you do not agree, please discontinue using the service.</p>
   <br>
@@ -172,9 +98,9 @@ margin-left: 10px;
   <p>All content on MovieMaze is owned or licensed by us. You may not use it for any purpose other than personal viewing.</p>
   <br>
   <h4>Contact Us</h4>
-  <p>If you have any questions about these terms, contact us at <a href="moawiah.eqailan@gmail.com">moawiah.eqailan@gmail.com</a>.</p>
+  <p>If you have any questions about these terms, contact us at <a href="moawiah.eqailan@gmail.com">moawiah.eqailan@gmail.com</a></p>
   <br>
-  <p>By using MovieMaze, you acknowledge that you have read and agree to these terms.</p>
+  <p style="color: #db0028;">By using MovieMaze, you acknowledge that you have read and agree to these terms.</p>
 
 
   
@@ -189,37 +115,10 @@ margin-left: 10px;
 
           
   <script>
-    function activeButton() {
-        let checkbox = document.getElementById("acceptTerms");
-        let priceButtonMonthly = document.getElementById("priceButtonMonthly");
-        let priceButtonYearly = document.getElementById("priceButtonYearly");
-        let subscriptionButton = document.getElementById("subscriptionButton");
-
-        // Enable or disable the subscription button based on conditions
-        subscriptionButton.disabled = !(checkbox.checked && (priceButtonMonthly.classList.contains("clicked") || priceButtonYearly.classList.contains("clicked")));
-    }
-
-    function selectPricePlan(plan) {
-        const priceButtonMonthly = document.getElementById("priceButtonMonthly");
-        const priceButtonYearly = document.getElementById("priceButtonYearly");
-
-        // Reset button classes
-        priceButtonMonthly.classList.remove("clicked");
-        priceButtonYearly.classList.remove("clicked");
-
-        // Add the "clicked" class to the selected plan button
-        if (plan === 'monthly') {
-            priceButtonMonthly.classList.add("clicked");
-        } else {
-            priceButtonYearly.classList.add("clicked");
-        }
-
-        // Update the state of the subscription button
-        activeButton();
-    }
+    
 
     function redirectToPage() {
-      history.back()
+        window.location.replace('./login_page.html')
     }
 </script>
 

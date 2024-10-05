@@ -517,6 +517,11 @@ visibility: visible;
 .movie-card {
   width: 200px;
 }
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 6px rgba(250, 183, 0, 0.8);
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
 
 .movie-card .poster-box {
   width: 200px;
