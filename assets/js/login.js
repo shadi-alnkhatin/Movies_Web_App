@@ -63,6 +63,7 @@ form_reg.addEventListener('submit', (event) => {
     // Save to localStorage using the key "reg-info"
     localStorage.setItem("reg-info", covertregtojson);
     alert("You have registerd successfully");
+    location.replace("./subscription.html");
     loginForm.style.display = "block";
     registerForm.style.display = "none";
     }
@@ -93,7 +94,7 @@ loginform.addEventListener('submit', (event) => {
     }
     if (logininfo.some(obj => obj.remail == login_email && obj.rpass == login_pass)) {
         alert("Logedin successfully");
-        location.replace("./subscription.html")
+        location.replace("./home.html")
         
     } else {
         alert("Username and password does not match");
