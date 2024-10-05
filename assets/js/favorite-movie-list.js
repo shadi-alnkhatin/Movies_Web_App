@@ -8,7 +8,6 @@ import { search } from "./search.js";
 
 const genreName = localStorage.getItem("genreName");
 const genreId= localStorage.getItem("urlParam");
-
 const pageContent = document.getElementById("container");
 
 sidebar();

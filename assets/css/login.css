@@ -24,7 +24,8 @@
        justify-content: center;
        align-items: center;
        min-height: 100vh;
-       background-image: url(../images/poster-background-hlybuowt1whxbh2z.jpg);
+       
+       background-image: url(../images/LoginBackground.jpg);
        background-position: center;
        background-size: cover;
        background-repeat: no-repeat;
@@ -51,7 +52,7 @@
    }
    
    #login-form {
-       display: flex; /* Show login form by default */
+       display: flex; 
    }
    
    .form-wrapper h2 {

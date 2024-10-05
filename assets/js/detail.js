@@ -6,11 +6,22 @@ import { sidebar } from "./sidebar.js";
 import { createMovieCard } from "./movie-card.js";
 import { search } from "./search.js";
 
-const movieId = window.localStorage.getItem("movieId");
+const movieId = localStorage.getItem("movieId");
 const pageContent = document.getElementById("container");
 sidebar();
 search();
-let favorite = "false";
+let favorite_Arr = [];
+
+favorite_Arr = JSON.parse(localStorage.getItem("array"));
+if(favorite_Arr == null){
+  localStorage.setItem("array",JSON.stringify(favorite_Arr))
+  favorite_Arr = [];
+}
+  let favorite = "false";
+  if (favorite_Arr.includes(movieId)){
+    favorite = "true";
+  }
+
 
 
 // Helper function to format genres into a readable list
@@ -90,7 +101,19 @@ fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}&append_t
     const movieId=movie.id;
     const videos = movie.videos.results;
     let VideosFiltered=filterVideos(videos); 
-    
+    let favorite_Arr = [];
+
+favorite_Arr = JSON.parse(localStorage.getItem("array"));
+if(favorite_Arr == null){
+  localStorage.setItem("array",JSON.stringify(favorite_Arr))
+  favorite_Arr = [];
+}
+
+  let favorite = "false";
+
+  if (favorite_Arr.includes(movieId)){
+    favorite = "true";
+  }
     // Create a container for the movie details
     let movieDetail = document.createElement("div");
     movieDetail.classList.add("movie-detail");
@@ -123,7 +146,7 @@ fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}&append_t
 
             <div class="meta-item card-badge">${certification}</div>
              <div class="separator"></div>
-                 <button id="favorite-button-id${movieId}" class="favorite" href="" style="z-index=1000; display: abslute;" onclick="favorite_togle(${movieId});" favotite="${favorite}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+        <button id="favorite-button-id${movieId}" class="favorite" href="" style="z-index=1000; display: abslute;" onclick="favorite_togle(${movieId});" favotite="${favorite}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
 </svg></button>
           </div>

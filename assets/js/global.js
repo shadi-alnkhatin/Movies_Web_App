@@ -1,16 +1,11 @@
 "use strict";
 
-
-const addEventOnElements = function (elements, eventType, callback) {
-  for (const elem of elements) elem.addEventListener(eventType, callback);
-};
-
-// Toggle search box in mobile device || small screen
 const searchBox = document.querySelector("[search-box]");
 const searchTogglers = document.querySelectorAll("[search-toggler]");
-
-addEventOnElements(searchTogglers, "click", function () {
-  searchBox.classList.toggle("active");
+searchTogglers.forEach(toggler => {
+  toggler.addEventListener("click", () => {
+    searchBox.classList.toggle("active");
+  });
 });
 
 // store movieID in `LocalStorage` when you click any card
@@ -62,6 +57,5 @@ console.log(array);
 
 
 function logout(){
-  window.location.href("./index.html")
-
+ location.href("./index.html")
 }

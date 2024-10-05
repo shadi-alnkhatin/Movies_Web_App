@@ -4,8 +4,8 @@ import { api_key } from "./api.js";
 import { createMovieCard } from "./movie-card.js";
 
 export function search() {
-  const searchWrapper = document.querySelector("[search-wrapper]");
-  const searchField = document.querySelector("[search-field]");
+  const searchWrapper = document.querySelector(".search-wrapper");
+  const searchField = document.querySelector(".search-field");
 
   const searchResultModal = document.createElement("div");
   searchResultModal.classList.add("search-result");
@@ -36,7 +36,7 @@ export function search() {
     
         searchWrapper.classList.remove("searching");
         searchResultModal.classList.add("active");
-        searchResultModal.innerHTML = ""; // remove old results
+        searchResultModal.innerHTML = ""; 
     
         searchResultModal.innerHTML = `
           <p class="label">Results for</p>
@@ -67,7 +67,7 @@ export function search() {
             })
             .then(actorData => {
               if (actorData.results.length > 0) {
-                const actorId = actorData.results[0].id; // Take the first matching actor
+                const actorId = actorData.results[0].id; 
     
                 // Fetch movies for the actor
                 const actorMoviesUrl = `https://api.themoviedb.org/3/person/${actorId}/movie_credits?api_key=${api_key}`;

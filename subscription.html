@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<style>
+    .terms_cond p{
+    padding: 2%;
+    color: var(--text-color);
+  }
+  
+  .terms_cond{
+    max-width: 60%;
+    background-color:#6f6f7136;
+    backdrop-filter: blur(1.4rem);
+    color: var(--on-background);
+    border-radius: 10px;
+    padding: 5%;
+    margin: 3% auto;
+    font-size:medium;
+  }
+  
+  .terms-button {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .accept-button {
+    background-color: #353535; 
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 7px;
+    cursor: pointer;
+  }
+  
+  .prices{
+    display: grid;
+    grid-template-columns: 300px 300px;
+    gap: 20px;
+    justify-content: center
+  }
+  
+  .price-card{
+    display: inline-block;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
+    border-color: rgb(250, 183, 0);
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #1a1820;
+  }
+  
+  .price-card:hover {
+    box-shadow: 0 4px 6px rgba(250, 183, 0, 0.8);
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  }
+  .card-body h5{
+  color: var(--on-surface-variant);
+  }
+  
+  .card-text {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+   justify-content: left;
+   
+  }
+  .card-text li {
+    margin: 5px 0;
+    font-size: 16px;
+    padding-left: 5px;
+  }
+  .card-text li:before {
+    content: "✓";
+    color: var(--rating-color);
+    font-weight: bold;
+    margin-right: 10px;
+    position:relative;
+    left: 0.5rem;
+  }
+  
+  .checkbox-container {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .checkbox-container label {
+  display: inline-block;
+  margin-left: 10px;
+  }
+  
+  
+  .price-button { 
+    opacity: 1;
+    background-color: var(--primary);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    position:relative;
+  
+    font-size: 16px;
+    border-radius: 7px;
+    cursor: pointer;
+  }
+  .price-button:disabled {
+    background-color: #353535; 
+  }
+  .price-button:enabled {
+    opacity: 1;
+    background-color: var(--primary);
+  }
+  
+
+  .center{
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  </style>
+
+  <!-- Primary meta tags -->
+  <title>MovieMaze</title>
+  <meta name="title" content="MovieMaze" />
+  <meta
+    name="description"
+    content="MovieMaze is a popular movie app made by Group 5."/>
+
+  <!-- favicon -->
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml" />
+
+  <!-- google font link -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap"
+    rel="stylesheet"/>
+
+  <!-- custom css link -->
+  <link rel="stylesheet" href="./assets/css/style.css" />
+<body>
+    <div class="center">
+      <div class="prices">
+          <div class="price-card" style="width: 28rem;">
+              <div class="card-body">
+                  <h3 class="card-title">Monthly Subscription Plan</h3>
+                  <h5>MovieMaze Monthly</h5>
+                  <ul class="card-text">Benefits:
+                      <li>Unlimited streaming</li>
+                      <li>Access to the latest movies</li>
+                      <li>4K UHD streaming</li>
+                      <li>1 simultaneous stream</li>
+                      <li>Cancel anytime</li>
+                  </ul>
+  
+                  <div class="center">
+                    <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off">
+                    <label class="btn btn-danger" for="option1">$3.99/month</label>
+                  </div>
+              </div>
+          </div>
+    
+          <div class="price-card" style="width: 28rem;">
+              <div class="card-body">
+                  <h3 class="card-title">Yearly Subscription Plan</h3>
+                  <h5>MovieMaze Yearly</h5>
+                  <ul class="card-text">Benefits:
+                      <li>All Monthly Plan features</li>
+                      <li>2 months free (billed annually)</li>
+                      <li>Priority customer support</li>
+                      <li>Access to exclusive content</li>
+                  </ul>
+                  <div class="center">
+                    <input type="radio" class="btn-check btn btn-secondary" name="options" id="option2" autocomplete="off">
+                    <label class="btn btn-danger" for="option2">$39.99/year</label>
+                  </div>
+                  
+              </div>
+          </div>
+      </div>
+      
+      <button id="subscriptionButton" class="btn btn-secondary center" onclick="redirectToPage()" disabled>Subscribe</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+      let radio1= document.getElementById("option1");
+      let radio2 = document.getElementById("option2");
+      option1.addEventListener("click", ()=>{
+          let button = document.getElementById("subscriptionButton");
+          button.removeAttribute("disabled");
+          button.classList.add("btn-danger")
+      })
+      radio2.addEventListener("click", ()=>{
+        let button = document.getElementById("subscriptionButton");
+        button.removeAttribute("disabled");
+        button.classList.add("btn-danger")
+      })
+
+      function redirectToPage(){
+        alert("you have subscribed successfully");
+        window.location.replace("./home.html")
+      }
+
+  </script>
+</body>
+</html>

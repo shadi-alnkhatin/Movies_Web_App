@@ -46,8 +46,10 @@ fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
 
 
      <p class="title">Account</p>
-    <a href="./landing.html" menu-close class="sidebar-link"
+    <a href="./index.html" menu-close class="sidebar-link"
         onclick='logout()'>Logout</a>
+        <a href="./about-us.html" menu-close class="sidebar-link"
+        >About Us</a>
     </div>
   `;
 
@@ -73,23 +75,28 @@ fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api_key}`)
   };
 
   const toggleSidebar = function (sidebar) {
-    // toggle sidebar in mobile screen
     const sidebarBtn = document.querySelector("[menu-btn]");
     const sidebarTogglers = document.querySelectorAll("[menu-toggler]");
     const sidebarClose = document.querySelectorAll("[menu-close]");
 
     const overlay = document.querySelector("#overlay");
-
-    addEventOnElements(sidebarTogglers, "click", function () {
-      sidebar.classList.toggle("active");
-      sidebarBtn.classList.toggle("active");
-      overlay.classList.toggle("active");
+  
+    // Add click event listeners to sidebar buttons
+    sidebarTogglers.forEach(function (toggler) {
+      toggler.addEventListener("click", function () {
+        sidebar.classList.toggle("active"); // Ensure you're toggling the sidebar here
+        sidebarBtn.classList.toggle("active");
+        overlay.classList.toggle("active");
+      });
     });
-
-    addEventOnElements(sidebarClose, "click", function () {
-      sidebar.classList.remove("active");
-      sidebarBtn.classList.remove("active");
-      overlay.classList.remove("active");
+  
+    // Add click event listeners to sidebar close buttons
+    sidebarClose.forEach(function (closer) {
+      closer.addEventListener("click", function () {
+        sidebar.classList.remove("active");
+        sidebarBtn.classList.remove("active");
+        overlay.classList.remove("active");
+      });
     });
   };
 }

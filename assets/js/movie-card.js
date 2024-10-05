@@ -2,9 +2,6 @@
 
 import { imageBaseURL } from "./api.js";
 
-// movie card
-
-// {name : " ", age , major}
 
 export function createMovieCard(movie) {
   const { poster_path, title, vote_average, release_date, id } = movie;//destrctor

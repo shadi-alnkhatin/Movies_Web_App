@@ -93,7 +93,7 @@ loginform.addEventListener('submit', (event) => {
     }
     if (logininfo.some(obj => obj.remail == login_email && obj.rpass == login_pass)) {
         alert("Logedin successfully");
-        location.replace("./home.html")
+        location.replace("./subscription.html")
         
     } else {
         alert("Username and password does not match");
@@ -101,10 +101,6 @@ loginform.addEventListener('submit', (event) => {
         console.log(login_email);
         console.log(login_pass);
         console.log(temp);
-        
-        
-        
-        
     }
      
 });
