@@ -50,15 +50,12 @@ function fetchMovies(page) {
           <div  class="grid-list"></div>
 
           <div  href="#start" class="pagination">
-            <a class="btn prev" ${page === 1 ? 'disabled' : ''}>Previous</a>
+            <a href="#start" class="btn prev" ${page === 1 ? 'disabled' : ''}>Previous</a>
             <a href="#start" class="btn next">Next</a>
-
+            </div>
           <div class="grid-list"></div>
 
-          <div class="pagination">
-            <button class="btn prev" ${page === 1 ? 'disabled' : ''}>Previous</button>
-            <button class="btn next">Next</button>
-          </div>
+       
         `;
         pageContent.appendChild(movieListElem); // Add the movie list section to the page
       } else {
