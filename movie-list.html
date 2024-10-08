@@ -41,9 +41,11 @@
           alt="MovieMaze home"
         />
       </a>
+   
 
-      <div class="search-box">
-        <div class="search-wrapper">
+
+      <div class="search-box" search-box>
+        <div class="search-wrapper" search-wrapper>
           <input
             type="text"
             name="search"
@@ -51,26 +53,18 @@
             placeholder="Search any movies..."
             autocomplete="off"
             class="search-field"
+            search-field
           />
           <img
-          src="./assets/images/search.png"
-          width="24"
-          height="24"
-          alt="search"
-          class="leading-icon"
-        />
-          <div class="loading-spinner">
-            <img
-              src="./assets/images/search.png"
-              width="24"
-              height="24"
-              alt="search"
-              class="leading-icon"
-            />
-          </div>
+            src="./assets/images/search.png"
+            width="24"
+            height="24"
+            alt="search"
+            class="leading-icon"
+          />
         </div>
-    
-        <button class="search-btn">
+
+        <button class="search-btn" search-toggler>
           <img
             src="./assets/images/close.png"
             width="24"
@@ -79,8 +73,8 @@
           />
         </button>
       </div>
-    
-      <div class="search-toggle search-btn">
+
+      <div class="search-btn" search-toggler menu-close>
         <img
           src="./assets/images/search.png"
           width="24"
@@ -88,8 +82,8 @@
           alt="open search box"
         />
       </div>
-    
-      <button class="menu-btn menu-toggle">
+
+      <button class="menu-btn" menu-btn menu-toggler>
         <img
           src="./assets/images/menu.png"
           width="24"
