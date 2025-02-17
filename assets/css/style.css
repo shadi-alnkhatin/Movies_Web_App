@@ -748,6 +748,15 @@ visibility: visible;
   }
 
 }
+@media (max-width: 575px) {
+  .movie-card {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  .movie-card .poster-box {
+    width: 100%;
+  }
+}
 
 .pagination{
   display: flex;
